@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 #define MAX 10
 
 void transitive_closure(int adj[MAX][MAX], int t[MAX][MAX], int n) {
