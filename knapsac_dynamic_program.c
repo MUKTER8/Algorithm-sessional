@@ -27,17 +27,16 @@ int knapsack(int capacity, int weights[], int values[], int n) {
 }
 
 int main() {
-    int n,i;
+    int n;
     printf("Enter the number of items: ");
     scanf("%d", &n);
 
     int values[n], weights[n];
 
-    for ( i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         printf("Enter the value and weight of item %d: ", i + 1);
         scanf("%d %d", &values[i], &weights[i]);
     }
-
 
     int capacity;
     printf("Enter the knapsack capacity: ");
