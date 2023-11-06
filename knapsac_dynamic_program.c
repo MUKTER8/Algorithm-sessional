@@ -1,35 +1,45 @@
-#include<stdio.h>
-int main(){
-    int n,i,j,val[10],wts[10],cap;
-    printf("Number of inputs : ");
-    scanf("%d",&n);
-    printf("Enter the values : ");
-    for(i=0;i<n;i++){
-        scanf("%d",&val[i]);
-    }
-    printf("Enter the weight : ");
-    for(i=0;i<n;i++){
-        scanf("%d",&wts[i]);
-    }
-    int dp[n+1][n+1];
-    for(i=0;i<=n;i++){
-        for(j=0;j<=n;j++){
-            dp[i][j]=dp[i-1][j];
-            if(j>=wts[i-1]){
-                int rcap =j-wts[i-1];
-                if(dp[i-1][rcap]+val[i-1]>dp[i-1][j]){
-                    dp[i][j]=dp[i-1][rcap]+val[i-1];
-                }
-                else {
-                    dp[i][j]= dp[i-1][j];
-                }
+#include <stdio.h>
 
-            }
-            else{
-                dp[i][j]=dp[i-1][j];
-            }
-        }
-        printf("%d\n",dp[n][cap]);
+int max(int a, int b)
+         { 
+            return (a > b) ? a : b;
+          }
+
+int knapSack(int W, int wt[], int val[], int n) {
+    if (n == 0 || W == 0)
+        return 0;
+
+    if (wt[n - 1] > W)
+        return knapSack(W, wt, val, n - 1);
+    else
+        return max(
+            val[n - 1] + knapSack(W - wt[n - 1], wt, val, n - 1),
+            knapSack(W, wt, val, n - 1));
+}
+
+int main() {
+    int n;
+    printf("Enter the number of items: ");
+    scanf("%d", &n);
+
+    int profit[n], weight[n];
+    printf("Enter the profit : ");
+    for (int i = 0; i < n; i++) {
+        
+        scanf("%d", &profit[i]);
     }
+    printf("Enter the weight for item : ");
+     for (int i = 0; i < n; i++) {
+        
+        scanf("%d", &weight[i]);
+    }
+
+
+    int W;
+    printf("knapsack capacity: ");
+    scanf("%d", &W);
+
+    printf("Maximum value: %d", knapSack(W, weight, profit, n));
+
     return 0;
 }
